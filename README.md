@@ -91,53 +91,323 @@ Convert YouTube videos and Instagram Reels to accurate text transcriptions with 
 
 ## Installation
 
-### For End Users (Distributed Executable)
+> **Choose Your Path**:
+> - **End Users**: Use the pre-built executable (easiest)
+> - **Experienced Developers**: Quick setup from source
+> - **Complete Beginners**: Detailed step-by-step guide below
 
-1. Download the latest release from the [Releases page](https://github.com/yourusername/youtube-whisper-transcriber/releases)
+### For End Users (Distributed Executable) --- COMING SOON ---
+
+1. Download the latest release from the [Releases page](https://github.com/RiseDial/youtube-whisper-transcriber)
 2. Extract the ZIP file to your desired location
 3. Double-click `YouTube Whisper Transcriber.exe` to launch
 4. On first run, the application will download the selected Whisper model
 5. Configure your output directory and preferences
 
-### For Developers (Running from Source)
+### For Experienced Developers (Quick Setup)
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/yourusername/youtube-whisper-transcriber.git
-   cd youtube-whisper-transcriber
-   ```
+```bash
+# Clone and navigate
+git clone https://github.com/RiseDial/youtube-whisper-transcriber.git
+cd youtube-whisper-transcriber
 
-2. **Install Python 3.11 or 3.12**
-   - Download from [python.org](https://www.python.org/downloads/)
+# Setup environment
+python -m venv venv
+venv\Scripts\activate
+pip install -r requirements.txt
 
-3. **Create a virtual environment**
+# Install FFmpeg (add to PATH)
+# Download from: https://ffmpeg.org/download.html
+
+# Run
+python src\main.py
+# or
+run_app.bat
+```
+
+**Installation Time**: 15-30 minutes (mostly downloading dependencies ~3GB)
+
+---
+
+### For Complete Beginners (Detailed Guide)
+
+**⏱️ Total Time**: 20-40 minutes
+**💾 Download Size**: ~3GB
+**📦 Disk Space**: ~5GB total (including models)
+
+Follow these steps carefully. Each step includes verification to ensure everything is working.
+
+#### Step 1: Install Python 3.11 or 3.12
+
+1. **Download Python**
+   - Go to [python.org/downloads](https://www.python.org/downloads/)
+   - Download Python 3.11 or 3.12 (Windows installer, 64-bit)
+
+2. **Run the Installer**
+   - **⚠️ CRITICAL**: Check the box **"Add Python to PATH"** at the bottom of the first screen
+   - Click "Install Now"
+   - Wait for installation to complete
+   - Click "Close" when done
+
+3. **Verify Installation**
+   - Open Command Prompt (Press `Windows Key`, type `cmd`, press Enter)
+   - Type: `python --version`
+   - You should see: `Python 3.11.x` or `Python 3.12.x`
+   - If you see an error, Python wasn't added to PATH correctly—reinstall with the checkbox checked
+
+#### Step 2: Install FFmpeg
+
+FFmpeg is required for extracting audio from videos.
+
+1. **Download FFmpeg**
+   - Go to: [https://github.com/BtbN/FFmpeg-Builds/releases](https://github.com/BtbN/FFmpeg-Builds/releases)
+   - Download: `ffmpeg-master-latest-win64-gpl.zip` (scroll down to Assets)
+   - Extract the ZIP file to `C:\ffmpeg` (create this folder if it doesn't exist)
+
+2. **Add FFmpeg to System PATH**
+   - Press `Windows Key` and type: `environment variables`
+   - Click "Edit the system environment variables"
+   - Click the "Environment Variables..." button (bottom right)
+   - Under "System variables" (bottom section), find and select "Path"
+   - Click "Edit..."
+   - Click "New"
+   - Type: `C:\ffmpeg\bin`
+   - Click "OK" on all windows
+
+3. **Verify FFmpeg Installation**
+   - **Close and reopen** Command Prompt (important!)
+   - Type: `ffmpeg -version`
+   - You should see FFmpeg version information
+   - If you see `'ffmpeg' is not recognized`, the PATH wasn't set correctly—repeat step 2
+
+#### Step 3: Download the Repository
+
+1. **Install Git** (if not already installed)
+   - Download from: [git-scm.com/downloads](https://git-scm.com/downloads)
+   - Run installer with default settings
+   - Restart Command Prompt after installation
+
+2. **Clone the Repository**
+   - Open Command Prompt
+   - Navigate to where you want the project (e.g., Documents):
+     ```bash
+     cd Documents
+     ```
+   - Clone the repository:
+     ```bash
+     git clone https://github.com/RiseDial/youtube-whisper-transcriber.git
+     ```
+   - Navigate into the folder:
+     ```bash
+     cd youtube-whisper-transcriber
+     ```
+
+#### Step 4: Create Virtual Environment
+
+A virtual environment keeps project dependencies separate from your system Python.
+
+1. **Create the Environment**
    ```bash
    python -m venv venv
    ```
+   - This takes 30-60 seconds
+   - You'll see a new `venv` folder appear
 
-4. **Activate the virtual environment**
+2. **Activate the Environment**
    ```bash
    venv\Scripts\activate
    ```
+   - You should see `(venv)` appear at the start of your command prompt
+   - This means the virtual environment is active
 
-5. **Install dependencies**
+#### Step 5: Install Dependencies
+
+This step downloads and installs all required libraries (~3GB, takes 15-30 minutes).
+
+1. **Install All Dependencies**
    ```bash
    pip install -r requirements.txt
    ```
+   - **Be patient**: This downloads PyTorch, Whisper, and many other libraries
+   - **Do not close** Command Prompt while this runs
+   - You'll see progress messages as packages install
+   - If you see errors, see [Common Installation Issues](#common-installation-issues) below
 
-6. **Install FFmpeg**
-   - Download from [ffmpeg.org](https://ffmpeg.org/download.html)
-   - Add FFmpeg to your system PATH
+2. **Wait for Completion**
+   - When finished, you'll see your command prompt return
+   - Should show: `Successfully installed [list of packages]`
 
-7. **Run the application**
+#### Step 6: Run the Application
+
+1. **Make Sure Virtual Environment is Active**
+   - Your command prompt should show `(venv)` at the start
+   - If not, run: `venv\Scripts\activate`
+
+2. **Launch the Application**
+
+   **Option A: Using the batch file (recommended)**
+   ```bash
+   run_app.bat
+   ```
+   - The batch file automatically activates the virtual environment
+
+   **Option B: Direct Python command**
    ```bash
    python src\main.py
    ```
 
-   Or use the provided batch file:
+3. **First Run**
+   - The application window should open
+   - On first transcription, Whisper will download the selected model (39MB to 1.5GB)
+   - This is a one-time download per model
+
+#### Step 7: Verify Everything Works
+
+1. **Test with a Short Video**
+   - Find a short YouTube video (1-2 minutes)
+   - Copy the URL
+   - Paste it into the application
+   - Select "tiny" model (fastest, smallest)
+   - Click "Start Transcription"
+   - Wait for completion
+
+2. **Success!**
+   - If transcription completes, everything is installed correctly
+   - The output file will be in your selected output directory
+
+---
+
+### Installation Verification Checklist
+
+After installation, verify each component:
+
+- [ ] **Python installed**: `python --version` shows 3.11 or 3.12
+- [ ] **FFmpeg installed**: `ffmpeg -version` shows version info
+- [ ] **Virtual environment active**: Command prompt shows `(venv)`
+- [ ] **Dependencies installed**: `pip list` shows torch, whisper, yt-dlp, etc.
+- [ ] **Application launches**: `python src\main.py` opens the GUI window
+- [ ] **Test transcription works**: Successfully transcribes a short test video
+
+---
+
+### Common Installation Issues
+
+#### Issue: `'python' is not recognized as an internal or external command`
+
+**Cause**: Python wasn't added to PATH during installation
+
+**Solution**:
+1. Uninstall Python (Windows Settings → Apps → Python)
+2. Download Python installer again
+3. Run installer and **CHECK** the "Add Python to PATH" box
+4. Complete installation
+5. Restart Command Prompt
+
+---
+
+#### Issue: `'ffmpeg' is not recognized as an internal or external command`
+
+**Cause**: FFmpeg isn't in system PATH
+
+**Solution**:
+1. Verify FFmpeg is at `C:\ffmpeg\bin\ffmpeg.exe`
+2. If not, extract ZIP to `C:\ffmpeg`
+3. Add `C:\ffmpeg\bin` to PATH:
+   - Press Windows Key → type "environment"
+   - Edit system environment variables
+   - Environment Variables → System variables → Path → Edit
+   - New → `C:\ffmpeg\bin` → OK
+4. **Restart Command Prompt** (critical step!)
+5. Test: `ffmpeg -version`
+
+---
+
+#### Issue: `pip install` fails with "Could not find a version that satisfies the requirement torch"
+
+**Cause**: Network issues or pip cache problems
+
+**Solutions**:
+1. **Update pip first**:
    ```bash
-   run_app.bat
+   python -m pip install --upgrade pip
    ```
+
+2. **Try again**:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. **If still fails**, install PyTorch separately first:
+   - Visit [pytorch.org/get-started/locally](https://pytorch.org/get-started/locally/)
+   - Select: Windows, Pip, Python, CPU (or CUDA if you have NVIDIA GPU)
+   - Copy and run the command shown
+   - Then run: `pip install -r requirements.txt`
+
+---
+
+#### Issue: Virtual environment won't activate (PowerShell users)
+
+**Cause**: PowerShell execution policy restrictions
+
+**Solution**:
+1. Open PowerShell as Administrator
+2. Run: `Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser`
+3. Type `Y` to confirm
+4. Close PowerShell
+5. Try activating again: `venv\Scripts\activate`
+
+**Alternative**: Use Command Prompt (cmd) instead of PowerShell
+
+---
+
+#### Issue: Installation takes too long or appears stuck
+
+**Expected Behavior**:
+- Installing dependencies typically takes 15-30 minutes
+- PyTorch alone is ~800MB and takes time
+- You should see progress messages
+
+**What to Do**:
+- Be patient—as long as you see occasional progress, it's working
+- Do not close the window
+- If truly stuck (no activity for 10+ minutes), press `Ctrl+C`, then try again
+
+---
+
+#### Issue: Out of disk space during installation
+
+**Cause**: Insufficient storage for dependencies
+
+**Solution**:
+1. Free up at least 5GB of disk space
+2. Delete the `venv` folder
+3. Run installation again: `python -m venv venv` and continue from Step 4
+
+---
+
+#### Issue: Application won't start - "Import Error" or "No module named..."
+
+**Cause**: Virtual environment not activated or dependencies not fully installed
+
+**Solution**:
+1. Ensure virtual environment is active: `venv\Scripts\activate`
+2. Reinstall dependencies: `pip install -r requirements.txt --force-reinstall`
+3. Verify installation: `pip list` should show whisper, torch, yt-dlp, etc.
+
+---
+
+### Getting More Help
+
+If you encounter issues not covered here:
+
+1. **Check the error message carefully** - it often explains what's wrong
+2. **Search the error on Google** - many installation issues have known solutions
+3. **Open an issue on GitHub** - [Report your problem](https://github.com/RiseDial/youtube-whisper-transcriber/issues)
+4. Include:
+   - Your Python version: `python --version`
+   - Your operating system
+   - The full error message
+   - What step you're on
 
 ---
 
@@ -508,7 +778,7 @@ The application follows an **MVC pattern with workflow orchestration**:
 - `torchaudio>=2.1.1` - Audio processing for PyTorch
 - `transformers>=4.35.2` - Transformer models
 - `numpy==1.25.2` - Numerical computing
-- `scipy==1.9.3` - Scientific computing
+- `scipy==1.11.4` - Scientific computing
 
 **Media Download:**
 - `yt-dlp>=2023.11.16` - YouTube video downloading
@@ -614,7 +884,7 @@ This application is built using exceptional open-source technologies:
 
 - **User Guide**: Press `F1` in the application or access Help → User Guide
 - **Keyboard Shortcuts**: Help → Keyboard Shortcuts
-- **GitHub Issues**: [Report bugs or request features](https://github.com/yourusername/youtube-whisper-transcriber/issues)
+- **GitHub Issues**: [Report bugs or request features](https://github.com/RiseDial/youtube-whisper-transcriber/issues)
 
 ### Contributing
 
