@@ -1,4 +1,4 @@
-# Video Whisper Transcriber
+# Youtube/Instagram Video Transcriber
 
 **Professional Windows desktop application for transcribing YouTube and Instagram videos to text using OpenAI Whisper AI**
 
